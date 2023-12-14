@@ -38,9 +38,22 @@ app.get('/', (req, res) => {
     
 });
 
-// N - NEW - allows a user to input a new fruit
+// N - NEW - Route
 app.get('/new', (req, res) => {
     res.render('New');
+});
+
+// CREATE -
+
+app.post('/logs', async (req, res) => {
+    // res.send('data received');
+    if(req.body.shipIsBroken === 'on') { //if checked, req.body.readyToEat is set to 'on'
+        req.body.shipIsBroken = true;
+    } else {  //if not checked, req.body.readyToEat is undefined
+        req.body.shipIsBroken = false;
+    }
+    console.log(req.body);
+    res.send( req.body);
 });
 
 app.listen(3001, () => {
