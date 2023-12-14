@@ -38,11 +38,59 @@ app.get('/', (req, res) => {
     
 });
 
-// N - NEW - Route
-app.get('/new', (req, res) => {
-    res.render('New');
+// I - INDEX - dsiplays a list of all fruits
+// app.get('/index',  (req, res) => {
+//     res.send('<h1>Index</h1>');
+// })
+app.get('/index', async (req, res) => {
+    // res.send(fruits);
+    try {
+        const foundLogs = await Logs.find({});
+        res.status(200).render('Index', {logs: foundLogs});
+    } catch (err) {
+        res.status(400).send(err);
+    }
+    
 });
 
+// N - NEW - Route
+app.get('/new', (req, res) => {
+    res.render('New')
+});
+
+
+// D - DELETE - PERMANENTLY removes fruit from the database
+// app.delete('/fruits/:id', async (req, res) => {
+//     // res.send('deleting...');
+//     try {
+//         const deletedFruit = await Fruit.findByIdAndDelete(req.params.id);
+//         console.log(deletedFruit);
+//         res.status(200).redirect('/fruits');
+//     } catch (err) {
+//         res.status(400).send(err);
+//     }
+// })
+
+// U - UPDATE - makes the actual changes to the database based on the EDIT form
+// app.put('/fruits/:id', async (req, res) => {
+//     if (req.body.readyToEat === 'on') {
+//         req.body.readyToEat = true;
+//     } else {
+//         req.body.readyToEat = false;
+//     }
+
+//     try {
+//         const updatedFruit = await Fruit.findByIdAndUpdate(
+//             req.params.id,
+//             req.body,
+//             { new: true },
+//         );
+//         console.log(updatedFruit);
+//         res.status(200).redirect(`/fruits/${req.params.id}`);
+//     } catch (err) {
+//         res.status(400).send(err);
+//     }
+//  })
 // CREATE -
 
 app.post('/logs', async (req, res) => {
@@ -67,11 +115,23 @@ app.post('/logs', async (req, res) => {
     
 });
 
+// E - EDIT - allow the user to provide the inputs to change the log
+// app.get('/fruits/:id/edit', async (req, res) => {
+//     try {
+//         const foundFruit = await Fruit.findById(req.params.id);
+//         console.log('foundFruit');
+//         console.log(foundFruit)
+//         res.status(200).render('Edit', {fruit: foundFruit});
+//     } catch (err) {
+//         res.status(400).send(err);
+//     }
+// })
+
 // S - SHOW - Show route displays details of an individual 
 app.get('/show', async (req, res) => {
     //res.send('<h1>Show Page</h1>');
     try {
-        const foundLogs = await Logs.findById(req.params.id);
+        const foundLogs = await Logs();
         res.render('Show', {logs: foundLogs});
     } catch (err) {
         res.status(400).send(err);
