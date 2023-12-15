@@ -6,6 +6,7 @@ class New extends React.Component {
             <div>
                 <h1>New Logs Page</h1>
                 {/* NOTE: action will be the route, method will be the HTTP verb */}
+                <a href = {'/logs'} > Go to Index Page</a> <br/><br/>
                 <form action='/logs' method="POST">
                     Title: <input type="text" name="title" /><br />
                     Entry: < input type="textarea" name="entry"/> <br />

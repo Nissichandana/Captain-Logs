@@ -35,7 +35,12 @@ app.use(express.urlencoded({extended:false}));
 app.use(methodOverride('_method'));
 
 app.get('/', (req, res) => {
-    res.send('<h1>this is my Captains log</h1>');
+    res.send(`<h1>Captain's Logs</h1> <a href = ${'/logs'} > Go to Index Page</a> <br/>`)
+  // res.render('NEW')
+       // res.render('/logs')
+    //'<h1>this is my Captains log</h1>'
+   //<a href = {'/logs'} > Go to Index Page</a> <br/>
+   
     
 });
 
